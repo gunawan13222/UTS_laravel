@@ -1,9 +1,8 @@
 @extends('layouts.master')
 @section('konten')
 @extends('layouts.pesan')
-<br>
-  <div class="card">
-     <table class="table table-bordered">
+<div class="card">
+  <table class="table table-bordered">
       <thead>
         <tr>
           <th style="width: 5%" >No</th>
@@ -45,10 +44,12 @@
         <a href="{{ route('kebutuhan.edit', $data->id) }}"><button type="button" class="btn btn-warning">edit</button></a>
         <button class="btn btn-danger btn-sm"  type="submit" onclick="return comfirm('apakah anda yakin ?')">Delete</button>
       </form>
-      </td>
-    </tr>
-    @endforeach
-  </tbody>
+    </td>
+  </tr>
+  @endforeach
+</tbody>
 </table>
-  </div>
+<a href="#"><button type="button" class="btn btn-danger">export pdf</button></a>
+<a href="#"><button type="button" class="btn btn-success">export exel</button></a>
+</div>
 @endsection
