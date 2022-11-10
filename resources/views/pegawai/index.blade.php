@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('konten')
 @extends('layouts.pesan')
+<br>
 <div class="container">
   <div class="card">
      <table class="table table-bordered">

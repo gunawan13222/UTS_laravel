@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kebutuhan;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class KebutuhanController extends Controller
 {
@@ -14,7 +15,10 @@ class KebutuhanController extends Controller
      */
     public function index()
     {
-        //
+        $kebutuhan = kebutuhan::all();
+        return view('kebutuhan.index', compact('kebutuhan'),[
+            'title'=>'kebutuhan'
+        ]);
     }
 
     /**
@@ -24,7 +28,8 @@ class KebutuhanController extends Controller
      */
     public function create()
     {
-        //
+        return view ('kebutuhan.create',[
+            'title'=>'kebutuhan']);
     }
 
     /**
@@ -35,7 +40,38 @@ class KebutuhanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->foto);
+        // $request->foto->store('galery');
+        // dd('berhasil bro');
+
+        
+       
+        $validated =$request->validate([
+            'jenis_kebutuhan'=>'required',
+            'kebutuhan'=>'required',
+            'deskripsi'=>'required',
+            'foto'=>'required',
+            
+        ],[
+            'jenis_kebutuhan.required'=>'jenis_kebutuhan harus di isi',
+            'kebutuhan.required'=>'isi kebutuhan',
+            'deskripsi.required'=>'isi deskripsi',
+            'foto.required'=>'upload foto',
+            
+        ]);
+        
+        
+        
+        $file_name = $request->foto->getClientOriginalName();
+        $foto = $request->foto->storeAs('galery', $file_name);
+        $kebutuhan = new kebutuhan();
+        $kebutuhan->jenis_kebutuhan=$request->jenis_kebutuhan;
+        $kebutuhan->kebutuhan=$request->kebutuhan;
+        $kebutuhan->deskripsi=$request->deskripsi;
+        $kebutuhan->foto= $foto;
+        $kebutuhan->save();
+        return redirect()->route('kebutuhan.index',[
+            'title'=>'kebutuhan'])->with('success', 'Data berhasil di buat!');
     }
 
     /**
@@ -44,9 +80,11 @@ class KebutuhanController extends Controller
      * @param  \App\Models\kebutuhan  $kebutuhan
      * @return \Illuminate\Http\Response
      */
-    public function show(kebutuhan $kebutuhan)
+    public function show($id)
     {
-        //
+        $kebutuhan = kebutuhan::findOrFail($id);
+        return view('kebutuhan.show',[
+            'title'=>'kebutuhan'], compact('kebutuhan'));
     }
 
     /**
@@ -55,9 +93,11 @@ class KebutuhanController extends Controller
      * @param  \App\Models\kebutuhan  $kebutuhan
      * @return \Illuminate\Http\Response
      */
-    public function edit(kebutuhan $kebutuhan)
+    public function edit($id)
     {
-        //
+        $kebutuhan = kebutuhan::findOrFail($id);
+        return view('kebutuhan.edit',[
+            'title'=>'kebutuhan'], compact('kebutuhan'));
     }
 
     /**
@@ -67,9 +107,22 @@ class KebutuhanController extends Controller
      * @param  \App\Models\kebutuhan  $kebutuhan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, kebutuhan $kebutuhan)
+    public function update(Request $request,$id)
     {
-        //
+         $validated =$request->validate([
+            'jenis_kebutuhan'=>'required',
+            'kebutuhan'=>'required',
+            'deskripsi'=>'required',
+            
+        ]);
+
+        $kebutuhan = kebutuhan::findOrFail($id);
+        $kebutuhan->jenis_kebutuhan=$request->jenis_kebutuhan;
+        $kebutuhan->kebutuhan=$request->kebutuhan;
+        $kebutuhan->deskripsi=$request->deskripsi;
+        $kebutuhan->save();
+        return redirect()->route('kebutuhan.index',[
+            'title'=>'kebutuhan'])->with('success', 'Data berhasil edit !');
     }
 
     /**
@@ -78,8 +131,11 @@ class KebutuhanController extends Controller
      * @param  \App\Models\kebutuhan  $kebutuhan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(kebutuhan $kebutuhan)
+    public function destroy($id)
     {
-        //
+        $kebutuhan = kebutuhan::findOrFail($id);
+        $kebutuhan->delete();
+        return redirect()->route('kebutuhan.index',[
+            'title'=>'kebutuhan'])->with('danger', 'Data berhasil di hapus !');
     }
 }

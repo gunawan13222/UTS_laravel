@@ -8,22 +8,19 @@
   @csrf
 <form >
   <div class="form-group">
-    <label for="nama">Nama</label>
+    <label for="nama">Nama </label>
     <input type="text" class="form-control" id="nama" name="nama" >
   </div>
-</form>
 <form >
   <div class="form-group">
-    <label for="whatsapp">Nomer whatsapp</label>
+    <label for="whatsapp">nomer whatsapp</label>
     <input type="text" class="form-control" id="whatsapp" name="whatsapp" >
   </div>
-</form>
 <form >
   <div class="form-group">
-    <label for="bagian">bagian</label>
+    <label for="whatsapp">bagian</label>
     <input type="text" class="form-control" id="bagian" name="bagian" >
   </div>
-</form>
   @error('nama','whatsapp','bagian')
 <strong>{{ $message }}</strong>
 @enderror

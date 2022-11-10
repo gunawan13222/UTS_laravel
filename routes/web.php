@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KebutuhanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,5 @@ Route::get('/', function () {
 
 Route::resource('pegawai', PegawaiController::class);
 Route::resource('pic', PicController::class);
+Route::resource('kategori', KategoriController::class);
+Route::resource('kebutuhan', KebutuhanController::class);
