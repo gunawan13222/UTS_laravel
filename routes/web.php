@@ -18,7 +18,9 @@ use App\Http\Controllers\KebutuhanController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('open',[
+        'title'=>'open'
+    ]);
 });
 
 

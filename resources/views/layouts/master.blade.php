@@ -27,7 +27,7 @@
             id="navbarCenteredExample">
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link {{ ($title === "pegawai") ? 'active' : '' }}" aria-current="page" href="/pegawai">PRODUK</a>
+                <a class="nav-link {{ ($title === "pegawai") ? 'active' : '' }}" aria-current="page" href="/pegawai">PEGAWAI</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {{ ($title === "kebutuhan") ? 'active' : '' }}" href="/kebutuhan">KEBUTUHAN</a>
